@@ -76,4 +76,14 @@
   }
 
   // Your custom JavaScript goes here
+  const $baconCloneButton = document.getElementById('cloneBaconButton');
+  const cloneBacon = () => {
+    const $baconSection = document.getElementById('baconSection');
+    const $baconImage = $baconSection.lastElementChild;
+    const $clonedBaconImage = $baconImage.cloneNode();
+
+    $baconImage.parentElement.appendChild($clonedBaconImage);
+  };
+
+  $baconCloneButton.addEventListener('click', cloneBacon);
 })();
