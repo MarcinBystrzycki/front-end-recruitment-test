@@ -1,0 +1,256 @@
+// variables
+$black: #000;
+$white: #fff;
+$light-grey: #f2f2f2;
+$medium-grey: #d9d9d9;
+$grey: #616161;
+$green: #86D13F;
+
+@mixin circle-mark {
+  border-radius: 50%;
+  font-size: 120%;
+  line-height: 1.75rem;
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+@mixin card {
+  border: none;
+  background-color: $white;
+  border-bottom: 2px solid $medium-grey;
+  border-radius: 5px;
+}
+
+@mixin header {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+#checkout {
+  padding-top: 8px;
+}
+
+.mdl-demo .mdl-layout__tab-panel#checkout {
+  background-color: $light-grey;
+
+  .mdl-grid {
+    flex-grow: 1;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+.legend {
+  @include header;
+  color: $black;
+  display: block;
+  margin: .75rem 0;
+}
+
+.legend__order {
+  @include circle-mark;
+  display: inline-flex;
+  justify-content: center;
+  color: $white;
+  background-color: $black;
+  font-weight: 700;
+  margin-right: .75rem;
+}
+
+.form-container {
+  align-items: flex-start;
+}
+
+.fieldset {
+  margin: .5rem .5rem 0 0;
+}
+
+.form__row {
+  margin: 0 0 1rem 2.5rem;
+  display: flex;
+
+  &.form__row--multiple-item {
+    justify-content: space-between;
+    .field-group {
+      max-width: calc(50% - 0.5rem);
+    }
+  }
+}
+
+.field-group {
+  @include card;
+  flex-grow: 1;
+  position: relative;
+  height: 3.5rem;
+  width: calc(100% - 2.5rem);
+  background-color: $white;
+
+  label {
+    position: absolute;
+    font-size: .8rem;
+    font-weight: 700;
+    top: 0;
+    left: .5rem;
+  }
+
+  select {
+    &.field {
+      appearance: none;
+      position: relative;
+      background: url(/images/keyboard_arrow_down.png) no-repeat right transparent;
+      background-position-x: 98%;
+      background-size: 1.75rem;
+    }
+  }
+
+  .field {
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-size: 1rem;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 1rem .5rem .25rem .5rem;
+    outline: none;
+    color: $grey;
+    background-color: transparent;
+
+    &::placeholder {
+      color: $medium-grey;
+    }
+  }
+
+  .credit-card-logo {
+    max-width: 2rem;
+    position: absolute;
+    top: 50%;
+    right: .75rem;
+    transform: translateY(-50%);
+    border: 1px solid $medium-grey;
+    border-radius: 5px;
+    padding: .5rem .25rem .5rem .25rem;
+    background-color: $white;
+  }
+
+  #creditCard {
+    padding-right: 3.5rem;
+  }
+}
+
+.question-mark {
+  @include circle-mark;
+  display: inline-flex;
+  border: 1px solid $medium-grey;
+  position: absolute;
+  top: 50%;
+  right: .75rem;
+  transform: scale(0.8) translateY(-50%);
+  &:before {
+    content: '?';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.column--right {
+  @include card;
+  margin-top: 3.5rem;
+  display: flex;
+  align-content: center;
+}
+
+.table__container {
+  margin: .3rem;
+  width: 100%;
+  border: 2px dotted $medium-grey;
+  border-radius: 5px;
+  padding: .75rem;
+}
+
+.table {
+  font-size: .8rem;
+  color: $black;
+  width: 100%;
+  margin-bottom: 2rem;
+
+  thead {
+    th {
+      text-align: left;
+      text-transform: uppercase;
+      padding-bottom: .75rem;
+    }
+  }
+  thead, tbody, tfoot {
+    td:nth-of-type(2) {
+      text-align: right;
+    }
+  }
+  thead, tbody {
+    tr:last-of-type {
+      td {
+        padding-bottom: .75rem;
+        border-bottom: 2px dotted $medium-grey;
+      }
+    }
+  }
+  tfoot {
+    td {
+      font-weight: 700;
+      padding-top: .75rem;
+
+      &:nth-of-type(2) {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+.button {
+  @include card;
+  @include header;
+  height: 3.5rem;
+  width: 100%;
+  color: $white;
+  line-height: 3.5rem;
+
+  &.button--submit {
+    background-color: $green;
+    .material-icons {
+      position: relative;
+      top: 2px;
+      font-size: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .mdl-grid.form-container {
+    .column {
+      order: 1;
+    }
+    .column--right {
+      order: 0;
+      margin-top: 0;
+      width: 100%;
+    }
+  }
+
+  .fieldset {
+    margin: 0;
+  }
+
+  .form__row {
+    margin: 0 0 1rem 0;
+  }
+}
