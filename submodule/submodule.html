@@ -50,6 +50,7 @@
 
     <!-- Your styles -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/custom.css">
   </head>
   <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -62,16 +63,130 @@
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
         </div>
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
-          <a href="#overview" class="mdl-layout__tab is-active">Bacon</a>
+          <a href="#overview" class="mdl-layout__tab">Bacon</a>
+          <a href="#checkout" class="mdl-layout__tab is-active">Checkout</a>
         </div>
       </header>
       <main class="mdl-layout__content">
-        <div class="mdl-layout__tab-panel is-active" id="overview">
+        <div class="mdl-layout__tab-panel" id="overview">
           <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
             <button id="cloneBaconButton" action="button">Yeah, I want more bacon!</button>
           </section>
           <section id="baconSection" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp section--bacon">
             <img src="http://media.washtimes.com.s3.amazonaws.com/media/image/2015/02/23/bacon.jpg" alt="Bacon" style="width: 100%; height: 100%;">
+          </section>
+        </div>
+        <div class="mdl-layout__tab-panel is-active" id="checkout">
+          <section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-grid form-container">
+              <div class="mdl-cell mdl-cell--8-col column">
+                <form action="#" class="form">
+                  <fieldset class="fieldset">
+                    <legend class="legend"><span class="legend__order">1</span>Personal information</legend>
+                    <div class="form__row form__row--multiple-item">
+                      <div class="field-group">
+                        <input class="field" type="text" id="firstName" placeholder="Elon">
+                        <label for="firstName">First name</label>
+                      </div>
+                      <div class="field-group">
+                        <input class="field" type="text" id="lastName" placeholder="Musk">
+                        <label for="lastName">Last name</label>
+                      </div>
+                    </div>
+                    <div class="form__row">
+                      <div class="field-group">
+                        <input class="field" type="email" id="email" placeholder="elon@spacex.com">
+                        <label for="email">Email</label>
+                      </div>
+                    </div>
+                    <div class="form__row form__row--multiple-item">
+                      <div class="field-group">
+                        <select class="field field--select" name="country" id="country">
+                          <option value="United States">United States</option>
+                          <option value="Poland">Poland</option>
+                        </select>
+                        <label for="country">Country</label>
+                      </div>
+                      <div class="field-group">
+                        <input class="field" type="number" id="postal" placeholder="10001">
+                        <label for="postal">Postal Code</label>
+                      </div>
+                    </div>
+                    <div class="form__row">
+                      <div class="field-group">
+                        <input class="field" type="text" placeholder="(212) 692-93-92" id="phone">
+                        <label for="phone">Phone number</label>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <fieldset class="fieldset">
+                    <legend class="legend"><span class="legend__order">2</span>Payment details</legend>
+                    <div class="form__row">
+                      <div class="field-group">
+                        <input class="field" type="number" id="creditCard" placeholder="0000 - 0000 - 0000 - 0000">
+                        <label for="creditCard">Credit Card Number</label>
+                        <img class="credit-card-logo" src="/images/visa-logo.png" alt="visa">
+                      </div>
+                    </div>
+                    <div class="form__row form__row--multiple-item">
+                      <div class="field-group">
+                        <input class="field" type="password" maxlength="3" id="securityCode" placeholder="***">
+                        <label for="securityCode">Security code</label>
+                        <span class="question-mark"></span>
+                      </div>
+                      <div class="field-group">
+                        <input class="field" type="date" id="expDate" placeholder="MM / YY">
+                        <label for="expDate">Expiration date</label>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <div class="form__row">
+                    <button class="button button--submit" type="submit">
+                      <i class="material-icons">
+                        shopping_cart
+                      </i>
+                      Complete purchase
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div class="mdl-cell mdl-cell--4-col column column--right">
+                <div class="table__container">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Your order</th>
+                        <th></th>
+                      </tr>
+                      <tr>
+                        <td>Apple Watch Sport</td>
+                        <td>$ 580</td>
+                      </tr>
+                      <tr>
+                        <td>Modern Buckle</td>
+                        <td>$ 380</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Total purchases</td>
+                        <td>$ 960.00</td>
+                      </tr>
+                      <tr>
+                        <td>Estimated tax</td>
+                        <td>$ 0</td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td>Total</td>
+                        <td>$ 960</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
           </section>
         </div>
         <footer class="mdl-mega-footer">
