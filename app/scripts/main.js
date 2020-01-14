@@ -84,6 +84,145 @@
 
     $baconImage.parentElement.appendChild($clonedBaconImage);
   };
-
   $baconCloneButton.addEventListener('click', cloneBacon);
+
+  // form handling
+  const $purchaseForm = document.getElementById('purchaseForm');
+  const validationObject = {
+    firstName: {
+      validation: /[a-zA-Z]+/,
+      validationType: 'regex',
+      error: 'Field invalid',
+    },
+    lastName: {
+      validation: /[a-zA-Z]+/,
+      validationType: 'regex',
+      error: 'Field invalid',
+    },
+    email: {
+      // eslint-disable-next-line max-len
+      validation: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      validationType: 'regex',
+      error: 'Wrong email address',
+    },
+    country: {
+      validation: /[a-zA-Z]+/,
+      validationType: 'regex',
+      error: 'Field invalid',
+    },
+    postal: {
+      validation: /^(([0-9]{2,2})(-[0-9]{3,3})|([0-9]{5,5})){1,6}?$/,
+      validationType: 'regex',
+      error: 'Wrong postal number',
+    },
+    phone: {
+      validation: /^[0-9\s- ()\+]{9,15}$/,
+      validationType: 'regex',
+      error: 'Wrong phone number',
+    },
+    creditCard: {
+      validation: /^.{16,19}$/,
+      validationType: 'regex',
+      error: 'Wrong credit card number, must be 16 digits at least',
+    },
+    securityCode: {
+      validation: /\d{3}$/,
+      validationType: 'regex',
+      error: 'Wrong security code',
+    },
+    expDate: {
+      validation: null,
+      validationType: 'date',
+      error: 'Field invalid',
+    },
+  };
+
+  const serialize = (form) => {
+    const values = {};
+    const inputs = form.elements;
+
+    for (const input of inputs) {
+      if (input.id) {
+        values[input.id] = {
+          value: input.value,
+        };
+      }
+    }
+    return values;
+  };
+
+  const showError = (element, message) => {
+    const $errorElement = document.createElement('span');
+    $errorElement.className = 'error';
+    $errorElement.innerHTML = message;
+    element.appendChild($errorElement);
+  };
+
+  const clearError = (element) => {
+    const $errorElement = element.getElementsByClassName('error')[0];
+    if ($errorElement) {
+      $errorElement.remove();
+    }
+  };
+
+  const validate = (form, validationObject) => {
+    const serializedFormData = serialize(form);
+    let validationSuccess = true;
+
+    Object.keys(serializedFormData).forEach((fieldKey) => {
+      const $fieldGroup = document.getElementById(fieldKey).parentElement;
+      const {validationType, validation, error} = validationObject[fieldKey];
+      const inputValue = serializedFormData[fieldKey].value;
+
+      clearError($fieldGroup);
+
+      if (validationType === 'regex') {
+        const regex = new RegExp(validation);
+
+        if (!inputValue || !regex.test(inputValue)) {
+          validationSuccess = false;
+          showError($fieldGroup, error);
+        }
+      }
+
+      if (validationType === 'date') {
+        const dateString = new Date(inputValue).toString();
+        if (!inputValue || dateString === 'Invalid Date') {
+          validationSuccess = false;
+          showError($fieldGroup, error);
+        }
+      }
+    });
+
+    return validationSuccess;
+  };
+
+  $purchaseForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const $panelSuccess = document.querySelector('.form__info-panel--success');
+    const $panelError = document.querySelector('.form__info-panel--error');
+    const $purchaseTable = document.getElementById('purchaseTable');
+    if (validate(event.target, validationObject)) {
+      $panelSuccess.className = $panelSuccess.className.replace('hidden', '');
+      if (!$panelError.className.includes('hidden')) {
+        $panelError.className = $panelError.className + ' hidden';
+      }
+      $purchaseForm.className = $purchaseForm.className + ' inactive';
+      $purchaseTable.className = $purchaseTable.className + ' inactive';
+    } else {
+      $panelError.className = $panelError.className.replace('hidden', '');
+      if (!$panelSuccess.className.includes('hidden')) {
+        $panelSuccess.className = $panelSuccess.className + ' hidden';
+      }
+    }
+  });
+
+  $purchaseForm.addEventListener('click', (event) => {
+    const {className, parentElement} = event.target;
+    if (className.includes('field') && !className.includes('fieldset')) {
+      clearError(parentElement);
+    }
+  });
+
 })();

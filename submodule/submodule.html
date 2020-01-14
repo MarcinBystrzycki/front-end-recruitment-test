@@ -79,8 +79,12 @@
         <div class="mdl-layout__tab-panel is-active" id="checkout">
           <section class="section--center mdl-grid mdl-grid--no-spacing">
             <div class="mdl-grid form-container">
+              <div class="mdl-cell mdl-cell--12-col column">
+                <div class="form__info-panel form__info-panel--success hidden">Congratulations! You've successfully completed purchase.</div>
+                <div class="form__info-panel form__info-panel--error hidden">Error! Please correct the form fields.</div>
+              </div>
               <div class="mdl-cell mdl-cell--8-col column">
-                <form action="#" class="form">
+                <form action="#" class="form" id="purchaseForm">
                   <fieldset class="fieldset">
                     <legend class="legend"><span class="legend__order">1</span>Personal information</legend>
                     <div class="form__row form__row--multiple-item">
@@ -152,7 +156,7 @@
               </div>
               <div class="mdl-cell mdl-cell--4-col column column--right">
                 <div class="table__container">
-                  <table class="table">
+                  <table class="table" id="purchaseTable">
                     <thead>
                       <tr>
                         <th>Your order</th>

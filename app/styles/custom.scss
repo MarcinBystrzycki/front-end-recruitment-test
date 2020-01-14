@@ -5,6 +5,8 @@ $light-grey: #f2f2f2;
 $medium-grey: #d9d9d9;
 $grey: #616161;
 $green: #86D13F;
+$dark-green: #598c27;
+$red: #ff0000;
 
 @mixin circle-mark {
   border-radius: 50%;
@@ -49,6 +51,13 @@ input[type=number] {
   -moz-appearance:textfield;
 }
 
+input::-webkit-calendar-picker-indicator{
+  display: none;
+}
+input[type="date"]::-webkit-input-placeholder{
+  visibility: hidden !important;
+}
+
 .legend {
   @include header;
   color: $black;
@@ -83,6 +92,30 @@ input[type=number] {
     .field-group {
       max-width: calc(50% - 0.5rem);
     }
+  }
+}
+
+.form__info-panel {
+  @include header;
+  height: 5rem;
+  border-radius: 5px;
+  border: 1px solid $black;
+  background: $light-grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $black;
+  animation: show .25s ease-in-out;
+
+  &.form__info-panel--success {
+    border-color: $green;
+    color: $green;
+    background-color: lighten($green, 30%);
+  }
+  &.form__info-panel--error {
+    border-color: $red;
+    color: $red;
+    background-color: lighten($red, 30%);
   }
 }
 
@@ -133,7 +166,7 @@ input[type=number] {
     max-width: 2rem;
     position: absolute;
     top: 50%;
-    right: .75rem;
+    right: .5rem;
     transform: translateY(-50%);
     border: 1px solid $medium-grey;
     border-radius: 5px;
@@ -144,6 +177,16 @@ input[type=number] {
   #creditCard {
     padding-right: 3.5rem;
   }
+
+  .error {
+    position: absolute;
+    color: $red;
+    bottom: -.25rem;
+    right: .5rem;
+    font-size: .6rem;
+    font-weight: 100;
+    animation: show .25s ease-in;
+  }
 }
 
 .question-mark {
@@ -151,9 +194,9 @@ input[type=number] {
   display: inline-flex;
   border: 1px solid $medium-grey;
   position: absolute;
-  top: 50%;
-  right: .75rem;
-  transform: scale(0.8) translateY(-50%);
+  top: 45%;
+  right: .25rem;
+  transform: scale(0.75) translateY(-50%);
   &:before {
     content: '?';
     position: absolute;
@@ -163,11 +206,23 @@ input[type=number] {
   }
 }
 
-.column--right {
-  @include card;
-  margin-top: 3.5rem;
-  display: flex;
-  align-content: center;
+.column {
+  margin-bottom: 0;
+
+  &.column--right {
+    @include card;
+    margin-top: 3.5rem;
+    display: flex;
+    align-content: center;
+  }
+
+  &:last-of-type {
+    margin-top: 0;
+  }
+
+  &:first-of-type {
+    margin-bottom: 1rem;
+  }
 }
 
 .table__container {
@@ -223,6 +278,8 @@ input[type=number] {
   width: 100%;
   color: $white;
   line-height: 3.5rem;
+  outline: none;
+  transition: all .2s;
 
   &.button--submit {
     background-color: $green;
@@ -232,12 +289,34 @@ input[type=number] {
       font-size: 1rem;
     }
   }
+
+  &:hover {
+    background-color: $dark-green;
+    border-bottom: none;
+  }
+}
+
+.inactive {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: 840px) {
   .mdl-grid.form-container {
     .column {
       order: 1;
+      &:nth-of-type(1) {
+        order: 2;
+      }
     }
     .column--right {
       order: 0;
